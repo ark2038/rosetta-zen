@@ -1,7 +1,7 @@
 {
  "network": {
-  "blockchain": "Bitcoin",
-  "network": "Testnet3"
+  "blockchain": "Zen",
+  "network": "test"
  },
  "data_directory": "bitcoin-testnet-data",
  "http_timeout": 300,

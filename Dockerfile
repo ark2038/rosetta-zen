@@ -23,18 +23,55 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y make gcc g++ autoconf autotools-dev bsdmainutils build-essential git libboost-all-dev \
   libcurl4-openssl-dev libdb++-dev libevent-dev libssl-dev libtool pkg-config python python-pip libzmq3-dev wget
 
+
+
+RUN apt-get -qqy update \
+  && apt-get -qqy --no-install-recommends install \
+    bzip2 \
+    ca-certificates \
+    sudo \
+    unzip \
+    wget \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+  
+
+RUN apt-get -qqy update \
+  && apt-get -qqy --no-install-recommends install \
+    curl \
+    bc \
+    vim \
+    git \
+    binutils \    
+    xz-utils \
+    python3-pip \
+    build-essential \
+    pkg-config \
+    libc6-dev \
+    m4 \
+    g++-multilib \
+    autoconf \
+    libtool \
+    ncurses-dev \ 
+    zlib1g-dev \ 
+    bsdmainutils \
+    automake \
+    ssh-client \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get -qyy clean
+
+
+
+
 # VERSION: Bitcoin Core 0.20.1
-RUN git clone https://github.com/bitcoin/bitcoin \
-  && cd bitcoin \
-  && git checkout 7ff64311bee570874c4f0dfa18f518552188df08
+RUN git clone https://github.com/HorizenOfficial/zen.git \
+  && cd zen \
+  && git checkout  v2.0.21-1
 
-RUN cd bitcoin \
-  && ./autogen.sh \
-  && ./configure --enable-glibc-back-compat --disable-tests --without-miniupnpc --without-gui --with-incompatible-bdb --disable-hardening --disable-zmq --disable-bench --disable-wallet \
-  && make
+RUN cd zen \
+  && zcutil/build.sh -j2 
 
-RUN mv bitcoin/src/bitcoind /app/bitcoind \
-  && rm -rf bitcoin
+RUN mv zen/src/zend /app/zend \
+  && rm -rf zen 
 
 # Build Rosetta Server Components
 FROM ubuntu:18.04 as rosetta-builder
@@ -70,21 +107,25 @@ RUN cd src \
 FROM ubuntu:18.04
 
 RUN apt-get update && \
-  apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev && \
+  apt-get install --no-install-recommends -y libevent-dev libboost-system-dev libboost-filesystem-dev libboost-test-dev libboost-thread-dev net-tools vim && \
   apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN mkdir -p /app \
   && chown -R nobody:nogroup /app \
   && mkdir -p /data \
-  && chown -R nobody:nogroup /data
+  && chown -R nobody:nogroup /data \
+  && mkdir -p /data/.zcash-params \
+  && chown -R nobody:nogroup /data/.zcash-params
 
 WORKDIR /app
 
 # Copy binary from bitcoind-builder
-COPY --from=bitcoind-builder /app/bitcoind /app/bitcoind
+COPY --from=bitcoind-builder /app/zend /app/zend
 
 # Copy binary from rosetta-builder
 COPY --from=rosetta-builder /app/* /app/
+RUN cd /root \
+  && ln -sf /data/.zcash-params .zcash-params
 
 # Set permissions for everything added to /app
 RUN chmod -R 755 /app/*

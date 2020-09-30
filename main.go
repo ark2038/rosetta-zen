@@ -54,7 +54,7 @@ const (
 
 	// maxHeapUsage is the size of the heap in MB before we manually
 	// trigger garbage collection.
-	maxHeapUsage = 8500 // ~8.5 GB
+	maxHeapUsage = 1000 // ~8.5 GB
 )
 
 var (

@@ -35,7 +35,7 @@ import (
 const (
 	// DefaultIndexCacheSize is the default size of the indexer cache. The larger
 	// the index cache size, the better the performance.
-	DefaultIndexCacheSize = 5 << 30 // 5 GB
+	DefaultIndexCacheSize = 1 << 30 // 5 GB
 
 	// indexPlaceholder is provided to the syncer
 	// to indicate we should both start from the
@@ -190,6 +190,7 @@ func (i *Indexer) waitForNode(ctx context.Context) error {
 	for {
 		_, err := i.client.NetworkStatus(ctx)
 		if err == nil {
+			logger.Infow("status is ok...")
 			return nil
 		}
 
@@ -206,7 +207,7 @@ func (i *Indexer) Sync(ctx context.Context) error {
 	if err := i.waitForNode(ctx); err != nil {
 		return fmt.Errorf("%w: failed to wait for node", err)
 	}
-
+	logger.Infow("call blocktorage.init...")
 	i.blockStorage.Initialize(i.workers)
 
 	startIndex := int64(indexPlaceholder)

@@ -29,8 +29,8 @@ import (
 )
 
 const (
-	bitcoindLogger       = "bitcoind"
-	bitcoindStdErrLogger = "bitcoind stderr"
+	bitcoindLogger       = "zend"
+	bitcoindStdErrLogger = "zend stderr"
 )
 
 func logPipe(ctx context.Context, pipe io.ReadCloser, identifier string) error {
@@ -64,9 +64,9 @@ func logPipe(ctx context.Context, pipe io.ReadCloser, identifier string) error {
 // StartBitcoind starts a bitcoind daemon in another goroutine
 // and logs the results to the console.
 func StartBitcoind(ctx context.Context, configPath string, g *errgroup.Group) error {
-	logger := utils.ExtractLogger(ctx, "bitcoind")
+	logger := utils.ExtractLogger(ctx, "zend")
 	cmd := exec.Command(
-		"/app/bitcoind",
+		"/app/zend",
 		fmt.Sprintf("--conf=%s", configPath),
 	) // #nosec G204
 
