@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
-	"github.com/coinbase/rosetta-bitcoin/configuration"
-	"github.com/coinbase/rosetta-bitcoin/services"
-	"github.com/coinbase/rosetta-bitcoin/utils"
+	"github.com/ark/rosetta-bitcoin/bitcoin"
+	"github.com/ark/rosetta-bitcoin/configuration"
+	"github.com/ark/rosetta-bitcoin/services"
+	"github.com/ark/rosetta-bitcoin/utils"
 
 	"github.com/coinbase/rosetta-sdk-go/asserter"
 	"github.com/coinbase/rosetta-sdk-go/storage"
