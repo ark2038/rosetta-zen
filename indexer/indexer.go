@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ark/rosetta-bitcoin/bitcoin"
-	"github.com/ark/rosetta-bitcoin/configuration"
-	"github.com/ark/rosetta-bitcoin/services"
-	"github.com/ark/rosetta-bitcoin/utils"
+	"github.com/ark2038/rosetta-zen/bitcoin"
+	"github.com/ark2038/rosetta-zen/configuration"
+	"github.com/ark2038/rosetta-zen/services"
+	"github.com/ark2038/rosetta-zen/utils"
 
 	"github.com/coinbase/rosetta-sdk-go/asserter"
 	"github.com/coinbase/rosetta-sdk-go/storage"
@@ -207,6 +207,7 @@ func (i *Indexer) Sync(ctx context.Context) error {
 	if err := i.waitForNode(ctx); err != nil {
 		return fmt.Errorf("%w: failed to wait for node", err)
 	}
+	 logger := utils.ExtractLogger(ctx, "indexer")
 	logger.Infow("call blocktorage.init...")
 	i.blockStorage.Initialize(i.workers)
 

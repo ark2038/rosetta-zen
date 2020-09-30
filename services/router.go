@@ -17,7 +17,7 @@ package services
 import (
 	"net/http"
 
-	"github.com/ark/rosetta-bitcoin/configuration"
+	"github.com/ark2038/rosetta-zen/configuration"
 
 	"github.com/coinbase/rosetta-sdk-go/asserter"
 	"github.com/coinbase/rosetta-sdk-go/server"

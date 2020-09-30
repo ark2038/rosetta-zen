@@ -19,9 +19,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ark/btcd/chaincfg"
-	"github.com/ark/btcd/chaincfg/chainhash"
-	"github.com/ark/btcd/txscript"
+	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/chaincfg/chainhash"
+	"github.com/btcsuite/btcd/txscript"
 	"github.com/btcsuite/btcutil"
 	"github.com/coinbase/rosetta-sdk-go/types"
 )

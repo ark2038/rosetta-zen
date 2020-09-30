@@ -24,11 +24,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/coinbase/rosetta-bitcoin/bitcoin"
-	"github.com/coinbase/rosetta-bitcoin/configuration"
-	"github.com/coinbase/rosetta-bitcoin/indexer"
-	"github.com/coinbase/rosetta-bitcoin/services"
-	"github.com/coinbase/rosetta-bitcoin/utils"
+	"github.com/ark2038/rosetta-zen/bitcoin"
+	"github.com/ark2038/rosetta-zen/configuration"
+	"github.com/ark2038/rosetta-zen/indexer"
+	"github.com/ark2038/rosetta-zen/services"
+	"github.com/ark2038/rosetta-zen/utils"
 
 	"github.com/coinbase/rosetta-sdk-go/asserter"
 	"github.com/coinbase/rosetta-sdk-go/server"
